@@ -72,10 +72,13 @@ class Follow(models.Model):
         User, on_delete=models.CASCADE, related_name='follows')
     following = models.ForeignKey(
         User, on_delete=models.SET_NULL, null=True, blank=True, related_name='following')
-    # following = models.ForeignKey(
-    #     User, on_delete=models.CASCADE, related_name='following')
-    # post = models.ForeignKey(
-    #     Post, on_delete=models.CASCADE, related_name='comments')
-    # text = models.TextField()
-    # created = models.DateTimeField(
-    #     'Дата добавления', auto_now_add=True, db_index=True)
+    
+    class Meta:
+        verbose_name = 'Подписка'
+        verbose_name_plural = 'Подписки'
+        constraints = [
+            models.UniqueConstraint(
+                fields=['user', 'following'],
+                name='unique_user_following',
+            )
+        ]
