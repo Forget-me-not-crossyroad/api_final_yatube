@@ -35,8 +35,8 @@ class GroupSerializer(serializers.ModelSerializer):
     """
 
     class Meta:
+        fields = '__all__'
         model = Group
-        fields = ('id', 'title', 'slug', 'description')
 
 
 class CommentSerializer(serializers.ModelSerializer):
